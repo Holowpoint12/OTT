@@ -1,0 +1,6 @@
+name,address,city,state,zip,latitude,longitude,isPublic,description
+ACE Beef,1177 South Coffee Rd,Nashville,GA,31639,31.2048,-83.2502,true,Family-owned farm specializing in grass-fed beef
+AU Beef,571 Coleman Road,Cobbtown,GA,30420,32.2751,-82.1393,true,Certified organic farm with pasture-raised cattle
+Green Pastures Farm,2250 Farm Road,Athens,GA,30601,33.9519,-83.3576,true,Sustainably managed farm with seasonal farm tours
+Highland Cattle Co.,845 Mountain View,Blue Ridge,GA,30513,34.8636,-84.3242,false,Heritage breed cattle raised in the North Georgia mountains
+Southern Farms,1890 Peachtree Street,Atlanta,GA,30309,33.7988,-84.3877,true,Urban farm initiative with educational programs 

@@ -1,0 +1,342 @@
+/* src/pages/LandingPage.css */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background: #f9f7ef; /* Slight off-white to mimic a clean, modern vibe */
+  color: #333;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.landing-page {
+  position: relative; /* For overlay stacking */
+}
+
+/* TOP BAR */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.hamburger-icon {
+  width: 1.5rem;
+  height: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.hamburger-icon span {
+  display: block;
+  height: 2px;
+  background-color: #333;
+}
+
+/* SIDE NAV (Hidden by default) */
+.side-nav {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Slide in from left */
+  width: 250px;
+  height: 100%;
+  background: #fff;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.side-nav.open {
+  left: 0; /* Reveal the nav */
+}
+
+.side-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.side-nav ul li {
+  margin: 1rem 0;
+}
+
+.side-nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* DARK OVERLAY behind side nav */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 999;
+}
+
+.overlay.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* HERO (cow image) */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  padding: 2rem;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.hero-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* MISSION & ABOUT SECTIONS */
+.mission-section,
+.about-section {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 2rem 1rem;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.mission-section h2,
+.about-section h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.mission-section p,
+.about-section p {
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* MAP SECTION */
+.map-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+.map-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* The search bar (location input + buttons) */
+.map-search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.location-input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  flex: 1;
+  max-width: 300px;
+}
+
+.more-options-btn,
+.search-btn {
+  background: #fefefe;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.more-options-btn:hover,
+.search-btn:hover {
+  background: #f0f0f0;
+}
+
+/* The two-column layout: left = location list, right = map */
+.map-content {
+  display: flex;
+  flex-wrap: wrap; /* So it wraps on smaller screens */
+  gap: 1rem;
+  justify-content: center;
+}
+
+.location-list {
+  width: 300px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 1rem;
+  height: 500px;
+  overflow-y: auto;
+}
+
+.location-item {
+  margin-bottom: 1.5rem;
+}
+
+.location-item h3 {
+  margin-bottom: 0.25rem;
+}
+
+.location-item a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.map-view {
+  flex: 1;
+  min-width: 300px;
+  max-width: 800px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure the map container has a specified height */
+.map-view {
+  height: 500px;
+  width: 100%;
+}
+
+/* Include Leaflet CSS */
+@import url('https://unpkg.com/leaflet@1.7.1/dist/leaflet.css');
+
+/* Fix map display */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Adjust content section */
+.content-section {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Search form styling */
+.search-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.location-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.more-options-btn, .search-btn {
+  padding: 10px 15px;
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+}
+
+/* Map content layout */
+.map-content {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.location-list {
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  padding: 15px;
+}
+
+.location-item {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.location-item:last-child {
+  border-bottom: none;
+}
+
+.location-item h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.location-item p {
+  margin: 5px 0;
+}
+
+.location-item a {
+  color: #4285F4;
+  text-decoration: none;
+}
+
+/* Make the map view take remaining space */
+.map-view {
+  flex: 2;
+  min-width: 300px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .map-content {
+    flex-direction: column;
+  }
+  
+  .location-list, .map-view {
+    width: 100%;
+    max-width: none;
+  }
+}
